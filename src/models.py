@@ -22,6 +22,7 @@ class Current(db.Model):
             "lastname": self.lastname,
             "age": self.age,
             "reference": self.reference,
+            "parents": self.parents,
         }
 
 class Parent(db.Model):
@@ -30,7 +31,10 @@ class Parent(db.Model):
     lastname = db.Column(db.String(120), unique=True, nullable=False)
     age = db.Column(db.String(120), unique=True, nullable=False)
     reference = db.Column(db.String(120), unique=True, nullable=False)
-    children = db.relationship('Current',backref='parent', lazy=True) 
+    children = db.relationship('Current',backref='parent', lazy=True)
+    parent = db.Column(db.Integer, db.ForeignKey('grandparent.id'))
+
+
 
     def __repr__(self):
         return '<Parent %r>' % self.id
@@ -51,8 +55,7 @@ class Grandparent(db.Model):
     lastname = db.Column(db.String(120), unique=True, nullable=False)
     age = db.Column(db.String(120), unique=True, nullable=False)
     reference = db.Column(db.String(120), unique=True, nullable=False)
-    # parents= db.Column(db.Integer, db.ForeignKey('parent.id'),
-    # children = db.relationship('Parent',backref='grandparent', lazy=True) 
+    children = db.relationship('Parent',backref='grandparent', lazy=True)
 
     def __repr__(self):
         return '<Grandparent %r>' % self.id

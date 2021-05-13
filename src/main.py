@@ -36,34 +36,30 @@ def sitemap():
 
 
 @app.route('/current', methods=['GET'])
-def get_all_current():
-    all_current = Current.query.all()
+def get_all_currents():
+    all_currents = Current.query.all()
     currents_serialized = []
-    for current in all_current:
-        print(current.serialize)
-        currents_serialized.append = ("current.serialize")
+    for current in all_currents:
+        currents_serialized.append(current.serialize())
     return jsonify(currents_serialized), 200
 
 
 @app.route('/parent', methods=['GET'])
-def get_all_current():
-    all_parent = Parent.query.all()
+def get_all_parents():
+    all_parents = Parent.query.all()
     parents_serialized = []
-    for parent in all_parent:
-        print(parent.serialize)
-        parents_serialized.append = ("parent.serialize")
-    return jsonify(currents_serialized), 200
+    for parent in all_parents:
+        parents_serialized.append(parent.serialize())
+    return jsonify(parents_serialized), 200
 
 
-@app.route('/grandParent', methods=['GET'])
- def get_all_current():
-    all_grandParent = GrandParent.query.all()
-    GrandParents = []
-    for Parent in all_GrandParent:
-         print(GrandParents.serialize())
-        GrandParents.append(GrandParent.serialize)
-
-    return jsonify(GrandParents), 200   
+@app.route('/grandparent', methods=['GET'])
+def get_all_grandparents():
+    all_grandparents = Grandparent.query.all()
+    grandparents = []
+    for grandparent in all_grandparent:
+        grandparents.append(grandparent.serialize())
+    return jsonify(grandparents), 200   
 
 
 
